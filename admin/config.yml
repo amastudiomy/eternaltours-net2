@@ -1,0 +1,1789 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: destination
+    label: Destinations
+    folder: cms/destination
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Paragraph
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_background-image
+        label: Background Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_tour-date-2
+        label: Tour Date 1
+        widget: string
+        required: false
+      - hint: ''
+        name: f_tours-date-2
+        label: Tours Date 2
+        widget: string
+        required: false
+      - hint: ''
+        name: f_tour-date-3
+        label: Tour Date 3
+        widget: string
+        required: false
+      - hint: ''
+        name: f_tour-date-4
+        label: Tour Date 4
+        widget: string
+        required: false
+      - hint: 13 days 10 accommodation nights
+        name: f_duration
+        label: Duration
+        widget: string
+        required: false
+      - hint: ''
+        name: f_title
+        label: Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_ground-cost
+        label: Cost
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_what-s-included
+        label: What's Included
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_what-s-excluded
+        label: What's Excluded
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-1-2
+        label: Day 1
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-2-2
+        label: Day 2
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-3-2
+        label: Day 3
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-4-2
+        label: Day 4
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-5-2
+        label: Day 5
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-6-2
+        label: Day 6
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-7-2
+        label: Day 7
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-8-2
+        label: Day 8
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-9-2
+        label: Day 9
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-10-2
+        label: Day 10
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-11-2
+        label: Day 11
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-12-2
+        label: Day 12
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-13-2
+        label: Day 13
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-14-2
+        label: Day 14
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_day-15-2
+        label: Day 15
+        widget: markdown
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: destination
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[destination].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Clone, key: 3e2ed3d'
+            label: Text
+            name: 3e2ed3d
+            widget: string
+          - hint: 'Original text: Documentation, key: -71c2ed66'
+            label: Text
+            name: '-71c2ed66'
+            widget: string
+          - hint: 'Original text: Created by Flowmingo, key: 1e5fffb'
+            label: Text
+            name: 1e5fffb
+            widget: string
+          - hint: 'Original text: Overview, key: 23735199'
+            label: Text
+            name: '23735199'
+            widget: string
+          - hint: 'Original text: Colors, key: 78a3a990'
+            label: Text
+            name: 78a3a990
+            widget: string
+          - hint: 'Original text: Typography, key: 5500514f'
+            label: Text
+            name: 5500514f
+            widget: string
+          - hint: 'Original text: Elements, key: 35b2517'
+            label: Text
+            name: 35b2517
+            widget: string
+          - hint: "Original text: Hatch is a utility framework for\_Webflow that is made up of over 2,000 low-level utility classes, helping you work insanely fast., key: -111cd995"
+            label: Text
+            name: '-111cd995'
+            widget: text
+          - hint: >-
+              Original text: Need a section with some vertical padding? Try
+              this., key: 28b7752d
+            label: Text
+            name: 28b7752d
+            widget: string
+          - hint: 'Original text: Section In Base, key: 7a3f8291'
+            label: Text
+            name: 7a3f8291
+            widget: string
+          - hint: >-
+              Original text: Need a container div to center your content with a
+              max width? Maybe at 1280px? Add this., key: -1f5d251d
+            label: Text
+            name: '-1f5d251d'
+            widget: string
+          - hint: 'Original text: Container 1280, key: -c4fdec8'
+            label: Text
+            name: '-c4fdec8'
+            widget: string
+          - hint: "Original text: What about some margin-bottom?\_Say 2rem\_, key: -51ea558b"
+            label: Text
+            name: '-51ea558b'
+            widget: string
+          - hint: 'Original text: (32px), key: 4728f53a'
+            label: Text
+            name: 4728f53a
+            widget: string
+          - hint: 'Original text: ., key: 2e'
+            label: Text
+            name: 2e
+            widget: string
+          - hint: 'Original text: Margin Bottom 8, key: 12eb9b5'
+            label: Text
+            name: 12eb9b5
+            widget: string
+          - hint: >-
+              Original text: Ok, but what if you want to remove that margin on
+              Tablet sizes. Add a combo class like this., key: 54349581
+            label: Text
+            name: '54349581'
+            widget: text
+          - hint: 'Original text: Tablet Margin Bottom 0, key: -58632bed'
+            label: Text
+            name: '-58632bed'
+            widget: string
+          - hint: >-
+              Original text: Hatch works out of the box by scaling down font
+              sizes and spacing at each breakpoint, but it's still flexible with
+              breakpoint classes to set the exact style you want at each size. ,
+              key: -29a35249
+            label: Text
+            name: '-29a35249'
+            widget: text
+          - hint: 'Original text: Just start your class with , key: 5e8e3097'
+            label: Text
+            name: 5e8e3097
+            widget: string
+          - hint: 'Original text: Tablet, key: -6b23d57a'
+            label: Text
+            name: '-6b23d57a'
+            widget: string
+          - hint: 'Original text: , , key: 574'
+            label: Text
+            name: '574'
+            widget: string
+          - hint: 'Original text: Landscape, key: -3347ed65'
+            label: Text
+            name: '-3347ed65'
+            widget: string
+          - hint: 'Original text: , or , key: 27c44a9'
+            label: Text
+            name: 27c44a9
+            widget: string
+          - hint: 'Original text: Portrait, key: 2f521fbb'
+            label: Text
+            name: 2f521fbb
+            widget: string
+          - hint: >-
+              Original text:  to apply a style at a specific breakpoint. , key:
+              68e173aa
+            label: Text
+            name: 68e173aa
+            widget: string
+          - hint: 'Original text: Be sure to check out the , key: -17072330'
+            label: Text
+            name: '-17072330'
+            widget: string
+          - hint: 'Original text: documentation, key: 5e9de2ba'
+            label: Text
+            name: 5e9de2ba
+            widget: string
+          - hint: >-
+              Original text:  to see all the utility classes Hatch has
+              available. Or, press , key: 6b0882fb
+            label: Text
+            name: 6b0882fb
+            widget: string
+          - hint: 'Original text: G, key: 47'
+            label: Text
+            name: '47'
+            widget: string
+          - hint: >-
+              Original text:  and scroll through the Style Manager. That works
+              too. , key: 3a4d81eb
+            label: Text
+            name: 3a4d81eb
+            widget: string
+          - hint: >-
+              Original text: Hatch makes it easy to change update the colors
+              throughout your site using global swatches., key: -16fa8db3
+            label: Text
+            name: '-16fa8db3'
+            widget: text
+          - hint: >-
+              Original text: To update the colors, select a color below and edit
+              the global swatch under the background color section in the right
+              sidebar., key: 7c625d06
+            label: Text
+            name: 7c625d06
+            widget: text
+          - hint: 'Original text: Global Colors, key: -71188f73'
+            label: Text
+            name: '-71188f73'
+            widget: string
+          - hint: 'Original text: Body Background Color, key: -22c01f71'
+            label: Text
+            name: '-22c01f71'
+            widget: string
+          - hint: 'Original text: Body Text Color, key: feffbce'
+            label: Text
+            name: feffbce
+            widget: string
+          - hint: 'Original text: Headings Color, key: 64c3d934'
+            label: Text
+            name: 64c3d934
+            widget: string
+          - hint: 'Original text: Brand Color, key: -1f37bab6'
+            label: Text
+            name: '-1f37bab6'
+            widget: string
+          - hint: 'Original text: Button Colors, key: 2cb8fe1e'
+            label: Text
+            name: 2cb8fe1e
+            widget: string
+          - hint: 'Original text: Button Color, key: -1754df0b'
+            label: Text
+            name: '-1754df0b'
+            widget: string
+          - hint: 'Original text: Button Hover Color, key: -3cfec48f'
+            label: Text
+            name: '-3cfec48f'
+            widget: string
+          - hint: 'Original text: Button Text Color, key: -2b6b83c2'
+            label: Text
+            name: '-2b6b83c2'
+            widget: string
+          - hint: 'Original text: Button Text Hover Color, key: 48e13bfa'
+            label: Text
+            name: 48e13bfa
+            widget: string
+          - hint: 'Original text: Button Secondary Color, key: -6ec97f57'
+            label: Text
+            name: '-6ec97f57'
+            widget: string
+          - hint: 'Original text: Button Secondary Hover Color, key: 392b0425'
+            label: Text
+            name: 392b0425
+            widget: string
+          - hint: 'Original text: Button Secondary Text Color, key: 1a74cd0a'
+            label: Text
+            name: 1a74cd0a
+            widget: string
+          - hint: 'Original text: Button Secondary Text Hover Color, key: -3f433c3a'
+            label: Text
+            name: '-3f433c3a'
+            widget: string
+          - hint: 'Original text: Link Colors, key: -640b03aa'
+            label: Text
+            name: '-640b03aa'
+            widget: string
+          - hint: 'Original text: Link Color, key: 4f5a7bbd'
+            label: Text
+            name: 4f5a7bbd
+            widget: string
+          - hint: 'Original text: Link Hover Color, key: 6f236039'
+            label: Text
+            name: 6f236039
+            widget: string
+          - hint: 'Original text: Nav Link Color, key: -56f40d06'
+            label: Text
+            name: '-56f40d06'
+            widget: string
+          - hint: 'Original text: Nav Link Hover Color, key: -5f844a4a'
+            label: Text
+            name: '-5f844a4a'
+            widget: string
+          - hint: 'Original text: Other, key: 48f8ef0'
+            label: Text
+            name: 48f8ef0
+            widget: string
+          - hint: >-
+              Original text: These apply to the background classes and you can
+              use them however you'd like., key: 5c85fd17
+            label: Text
+            name: 5c85fd17
+            widget: string
+          - hint: 'Original text: Border Color, key: 3424a6f'
+            label: Text
+            name: 3424a6f
+            widget: string
+          - hint: 'Original text: Form Input Background Color, key: 68a1a63'
+            label: Text
+            name: 68a1a63
+            widget: string
+          - hint: 'Original text: Form Input Placeholder Color, key: -4d1943fc'
+            label: Text
+            name: '-4d1943fc'
+            widget: string
+          - hint: 'Original text: Background Colors (optional), key: 5d6adfdf'
+            label: Text
+            name: 5d6adfdf
+            widget: string
+          - hint: 'Original text: These are extra colors tied to , key: -6e8f7ef0'
+            label: Text
+            name: '-6e8f7ef0'
+            widget: string
+          - hint: 'Original text: background color utility classes, key: 3a5b7143'
+            label: Text
+            name: 3a5b7143
+            widget: string
+          - hint: 'Original text:  for you to use however you''d like., key: 2c19605b'
+            label: Text
+            name: 2c19605b
+            widget: string
+          - hint: 'Original text: Background Color 1, key: -485e23e'
+            label: Text
+            name: '-485e23e'
+            widget: string
+          - hint: 'Original text: Background Color 2, key: -485e23d'
+            label: Text
+            name: '-485e23d'
+            widget: string
+          - hint: 'Original text: Background Color 3, key: -485e23c'
+            label: Text
+            name: '-485e23c'
+            widget: string
+          - hint: 'Original text: Background Color 4, key: -485e23b'
+            label: Text
+            name: '-485e23b'
+            widget: string
+          - hint: 'Original text: Text Colors (optional), key: 172c061e'
+            label: Text
+            name: 172c061e
+            widget: string
+          - hint: 'Original text: text color utility classes, key: 7bb3c802'
+            label: Text
+            name: 7bb3c802
+            widget: string
+          - hint: 'Original text: Text Color 1, key: -7214c93f'
+            label: Text
+            name: '-7214c93f'
+            widget: string
+          - hint: 'Original text: Text Color 2, key: -7214c93e'
+            label: Text
+            name: '-7214c93e'
+            widget: string
+          - hint: 'Original text: Text Color 3, key: -7214c93d'
+            label: Text
+            name: '-7214c93d'
+            widget: string
+          - hint: 'Original text: Text Color 4, key: -7214c93c'
+            label: Text
+            name: '-7214c93c'
+            widget: string
+          - hint: 'Original text: Hatch comes with , key: -4e4ad157'
+            label: Text
+            name: '-4e4ad157'
+            widget: string
+          - hint: 'Original text: Monserrat font, key: 871755e'
+            label: Text
+            name: 871755e
+            widget: string
+          - hint: >-
+              Original text:  out of the box, and all of the headings and
+              paragraphs inherit that font from the body element. , key:
+              -bae9042
+            label: Text
+            name: '-bae9042'
+            widget: text
+          - hint: >-
+              Original text: To update your font, first add your font in your
+              project settings, then select the , key: 32c4df31
+            label: Text
+            name: 32c4df31
+            widget: string
+          - hint: 'Original text: Body (All Pages), key: -206a72b2'
+            label: Text
+            name: '-206a72b2'
+            widget: string
+          - hint: >-
+              Original text:  and change to your new font family. , key:
+              1f8fcfb8
+            label: Text
+            name: 1f8fcfb8
+            widget: string
+          - hint: "Original text: Body (All\_Pages), key: 52b32dce"
+            label: Text
+            name: 52b32dce
+            widget: string
+          - hint: >-
+              Original text: If you'd like to use a different font for your
+              headings, select each of the headings below one by one and change
+              the font under the typography section in the right sidebar., key:
+              b72baa2
+            label: Text
+            name: b72baa2
+            widget: text
+          - hint: 'Original text: All H1 Headings, key: -63ec17f7'
+            label: Text
+            name: '-63ec17f7'
+            widget: string
+          - hint: 'Original text: Heading level one, key: 258e3b0c'
+            label: Text
+            name: 258e3b0c
+            widget: string
+          - hint: 'Original text: Heading level two, key: 258e4ef2'
+            label: Text
+            name: 258e4ef2
+            widget: string
+          - hint: 'Original text: Heading level three, key: -4d05f3c'
+            label: Text
+            name: '-4d05f3c'
+            widget: string
+          - hint: 'Original text: Heading level four, key: -73caeac0'
+            label: Text
+            name: '-73caeac0'
+            widget: string
+          - hint: 'Original text: Heading level five, key: -73cb0134'
+            label: Text
+            name: '-73cb0134'
+            widget: string
+          - hint: 'Original text: Heading level six, key: 258e4988'
+            label: Text
+            name: '258e4988'
+            widget: string
+          - hint: 'Original text: Buttons, key: 719b5761'
+            label: Text
+            name: 719b5761
+            widget: string
+          - hint: 'Original text: Primary Small, key: -487a12d7'
+            label: Text
+            name: '-487a12d7'
+            widget: string
+          - hint: 'Original text: Button Primary, key: 1f0ae314'
+            label: Text
+            name: 1f0ae314
+            widget: string
+          - hint: 'Original text: Button Large, key: -16dc5333'
+            label: Text
+            name: '-16dc5333'
+            widget: string
+          - hint: 'Original text: Secondary Small, key: -1b4f04e5'
+            label: Text
+            name: '-1b4f04e5'
+            widget: string
+          - hint: 'Original text: Button Secondary, key: -3b0eb5fa'
+            label: Text
+            name: '-3b0eb5fa'
+            widget: string
+          - hint: 'Original text: Secondary Large, key: -1bb6deb1'
+            label: Text
+            name: '-1bb6deb1'
+            widget: string
+          - hint: 'Original text: Forms, key: 40e9c0f'
+            label: Text
+            name: 40e9c0f
+            widget: string
+          - hint: 'Original text: Name, key: 24eeab'
+            label: Text
+            name: 24eeab
+            widget: string
+          - hint: 'Original text: Email Address, key: -2b7010d0'
+            label: Text
+            name: '-2b7010d0'
+            widget: string
+          - hint: 'Original text: Message, key: -63dc6819'
+            label: Text
+            name: '-63dc6819'
+            widget: string
+          - hint: 'Original text: Select, key: -6c9bdee4'
+            label: Text
+            name: '-6c9bdee4'
+            widget: string
+          - hint: 'Original text: Select one..., key: 57f3b1cc'
+            label: Text
+            name: 57f3b1cc
+            widget: string
+          - hint: 'Original text: First Choice, key: -491b32af'
+            label: Text
+            name: '-491b32af'
+            widget: string
+          - hint: 'Original text: Second Choice, key: 3c4172cd'
+            label: Text
+            name: 3c4172cd
+            widget: string
+          - hint: 'Original text: Third Choice, key: -1b351146'
+            label: Text
+            name: '-1b351146'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: "Original text: Got thoughts?\_Feedback?\_, key: -7b772cab"
+            label: Text
+            name: '-7b772cab'
+            widget: string
+          - hint: "Original text: I'd love to hear what you think of Hatch!\_If you have any thoughts on what you like, or don't like, or ideas on how Hatch could be improved please let me know. Find me on Twitter (, key: 5d68933e"
+            label: Text
+            name: 5d68933e
+            widget: text
+          - hint: 'Original text: @mackenziechild, key: 3354f9ab'
+            label: Text
+            name: 3354f9ab
+            widget: string
+          - hint: 'Original text: ) or email me , key: -57c22462'
+            label: Text
+            name: '-57c22462'
+            widget: string
+          - hint: 'Original text: mackenzie@flowmingo.co, key: 4ccf68dd'
+            label: Text
+            name: 4ccf68dd
+            widget: string
+          - hint: 'Original text: What''s next for Hatch?, key: -36703a6d'
+            label: Text
+            name: '-36703a6d'
+            widget: string
+          - hint: 'Original text: Next up I''m working on..., key: -22504c09'
+            label: Text
+            name: '-22504c09'
+            widget: string
+          - hint: "Original text: A homepage +\_searchable documentation site for Hatch., key: -136f025e"
+            label: Text
+            name: '-136f025e'
+            widget: string
+          - hint: >-
+              Original text: A pixel version of Hatch. Rems are scalable and
+              will work well for a lot of sites, but pixels are easier to wrap
+              my head around lol. , key: -643ba398
+            label: Text
+            name: '-643ba398'
+            widget: text
+          - hint: "Original text: Hatch UI. A UI\_kit built on top of the Hatch framework that will include dozens of pre-built components and layouts (like navigations, pricing tablets, features, etc) to help you go EVEN FASTER!, key: 5941016"
+            label: Text
+            name: '5941016'
+            widget: text
+          - hint: 'Original text: Created by , key: 461e7d51'
+            label: Text
+            name: 461e7d51
+            widget: string
+          - hint: 'Original text: Mackenzie Child, key: 2306e64d'
+            label: Text
+            name: 2306e64d
+            widget: string
+          - hint: 'Original text:  & , key: 7cda'
+            label: Text
+            name: 7cda
+            widget: string
+          - hint: 'Original text: Flowmingo, key: 1ecb122c'
+            label: Text
+            name: 1ecb122c
+            widget: string
+          - hint: 'Original text: Brought to you by , key: 1329ace6'
+            label: Text
+            name: 1329ace6
+            widget: string
+          - hint: 'Original text: Webflow, key: -53d3659e'
+            label: Text
+            name: '-53d3659e'
+            widget: string
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: Tours, key: 4d3f0fb'
+            label: Text
+            name: 4d3f0fb
+            widget: string
+          - hint: 'Original text: Contact Us, key: 7f2746de'
+            label: Text
+            name: 7f2746de
+            widget: string
+          - hint: 'Original text: Adventure, key: 4e1316f0'
+            label: Text
+            name: 4e1316f0
+            widget: string
+          - hint: 'Original text:  Of A Lifetime, key: 4fd59291'
+            label: Text
+            name: 4fd59291
+            widget: string
+          - hint: >-
+              Original text: Explore the World's Most Thrilling Destinations
+              with Our Expert Guides, key: 174948d2
+            label: Text
+            name: 174948d2
+            widget: string
+          - hint: 'Original text: " Your Gateway to the World''s , key: 7642fc8b'
+            label: Text
+            name: 7642fc8b
+            widget: string
+          - hint: 'Original text: Most Fascinating, key: -2fe86efe'
+            label: Text
+            name: '-2fe86efe'
+            widget: string
+          - hint: 'Original text:  Destinations", key: 7d9dea5d'
+            label: Text
+            name: 7d9dea5d
+            widget: string
+          - hint: 'Original text: Explore With Eternal Tours, key: -32b131f5'
+            label: Text
+            name: '-32b131f5'
+            widget: string
+          - hint: 'Original text: Adventure Travel for the , key: -63415044'
+            label: Text
+            name: '-63415044'
+            widget: string
+          - hint: 'Original text: Bold and Curious, key: 782a3e20'
+            label: Text
+            name: 782a3e20
+            widget: string
+          - hint: >-
+              Original text: We offers personalized and sustainable travel
+              experiences to some of the world's most remote and stunning
+              destinations. With experienced guides and tailored travel
+              packages, we provide unforgettable adventures for adventurous
+              travelers., key: -182d6658
+            label: Text
+            name: '-182d6658'
+            widget: text
+          - hint: 'Original text: Adventure at its best, key: -6479b187'
+            label: Text
+            name: '-6479b187'
+            widget: string
+          - hint: 'Original text: Cultural immersion, key: 29444f6d'
+            label: Text
+            name: 29444f6d
+            widget: string
+          - hint: 'Original text: Sustainable tourism, key: 541933e8'
+            label: Text
+            name: '541933e8'
+            widget: string
+          - hint: 'Original text: Tailored experiences, key: 7e5e35b'
+            label: Text
+            name: 7e5e35b
+            widget: string
+          - hint: 'Original text: Choose Your Next Adventure, key: 17433e27'
+            label: Text
+            name: '17433e27'
+            widget: string
+          - hint: 'Original text: Our , key: 25ae74'
+            label: Text
+            name: 25ae74
+            widget: string
+          - hint: 'Original text: Upcoming, key: 51bced3c'
+            label: Text
+            name: 51bced3c
+            widget: string
+          - hint: 'Original text:  Trip, key: 1ead865'
+            label: Text
+            name: 1ead865
+            widget: string
+          - hint: >-
+              Original text: Explore the world's most fascinating and remote
+              locations with Eternal Tours, from the rugged landscapes of
+              Afghanistan to the vibrant cultures of Southeast Asia, and
+              everything in between., key: -31af90cc
+            label: Text
+            name: '-31af90cc'
+            widget: text
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: Let''s Plan Your Adventure, key: -15cbd01f'
+            label: Text
+            name: '-15cbd01f'
+            widget: string
+          - hint: 'Original text: Our Hassle-Free , key: 177b66d'
+            label: Text
+            name: 177b66d
+            widget: string
+          - hint: 'Original text: Booking Process, key: -46645698'
+            label: Text
+            name: '-46645698'
+            widget: string
+          - hint: >-
+              Original text: Discover how we work with you to create a custom
+              itinerary that fits your unique travel style and preferences and
+              take care of all the details along the way, from expert guides to
+              top-quality accommodations and transportation., key: 301b7b7a
+            label: Text
+            name: 301b7b7a
+            widget: text
+          - hint: 'Original text: 1. , key: bda3'
+            label: Text
+            name: bda3
+            widget: string
+          - hint: 'Original text: Choose, key: 78426237'
+            label: Text
+            name: '78426237'
+            widget: string
+          - hint: >-
+              Original text: Browse our website and select your desired
+              adventure travel destination., key: 6099a6ef
+            label: Text
+            name: 6099a6ef
+            widget: string
+          - hint: 'Original text: 2. , key: c164'
+            label: Text
+            name: c164
+            widget: string
+          - hint: 'Original text: Whatsapp, key: 772ccdb2'
+            label: Text
+            name: 772ccdb2
+            widget: string
+          - hint: >-
+              Original text: Get in touch with us and let us know your travel
+              preferences and requirements., key: -50c35c07
+            label: Text
+            name: '-50c35c07'
+            widget: string
+          - hint: 'Original text: 3. , key: c525'
+            label: Text
+            name: c525
+            widget: string
+          - hint: 'Original text: Booked, key: 76f01d68'
+            label: Text
+            name: 76f01d68
+            widget: string
+          - hint: >-
+              Original text: We'll work with you to create a customized travel
+              package that meets your needs and preferences., key: 70cfa3d4
+            label: Text
+            name: 70cfa3d4
+            widget: text
+          - hint: 'Original text: 4. , key: c8e6'
+            label: Text
+            name: c8e6
+            widget: string
+          - hint: 'Original text: Explore, key: 15309273'
+            label: Text
+            name: '15309273'
+            widget: string
+          - hint: >-
+              Original text: Set off on your adventure and enjoy an
+              unforgettable travel experience with Eternal Tours., key:
+              -308b0642
+            label: Text
+            name: '-308b0642'
+            widget: string
+          - hint: 'Original text: Let''s Start The Journey, key: -477d5386'
+            label: Text
+            name: '-477d5386'
+            widget: string
+          - hint: >-
+              Original text: For custom trip enquiries or any question, please ,
+              key: -7e598433
+            label: Text
+            name: '-7e598433'
+            widget: string
+          - hint: 'Original text: WhatsApp, key: 772c5592'
+            label: Text
+            name: 772c5592
+            widget: string
+          - hint: 'Original text:  or email us: , key: -4a2917b'
+            label: Text
+            name: '-4a2917b'
+            widget: string
+          - hint: 'Original text: info@eternaltours.net, key: a7e5e3f'
+            label: Text
+            name: a7e5e3f
+            widget: string
+          - hint: 'Original text: Your Questions Answered, key: -2f6fb083'
+            label: Text
+            name: '-2f6fb083'
+            widget: string
+          - hint: 'Original text: Eternal Tours , key: 76015228'
+            label: Text
+            name: '76015228'
+            widget: string
+          - hint: 'Original text: FAQ, key: 10ef6'
+            label: Text
+            name: 10ef6
+            widget: string
+          - hint: >-
+              Original text: Find answers to the most common questions about our
+              tours and services, including information on pricing,
+              accommodations, safety, and more. Whether you're a seasoned
+              traveler or new to adventure travel, we've got you covered., key:
+              56fe10d8
+            label: Text
+            name: 56fe10d8
+            widget: text
+          - hint: 'Original text: Experience, key: 71b8358a'
+            label: Text
+            name: 71b8358a
+            widget: string
+          - hint: 'Original text: Pricing, key: 507137a6'
+            label: Text
+            name: 507137a6
+            widget: string
+          - hint: 'Original text: Safety, key: -6cd6f50e'
+            label: Text
+            name: '-6cd6f50e'
+            widget: string
+          - hint: 'Original text: Accommodations, key: -5c13a97f'
+            label: Text
+            name: '-5c13a97f'
+            widget: string
+          - hint: 'Original text: Frequently asked question 1, key: 1755a744'
+            label: Text
+            name: 1755a744
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare., key: b339117
+            label: Text
+            name: b339117
+            widget: text
+          - hint: 'Original text: Frequently asked question 2, key: 1755a745'
+            label: Text
+            name: 1755a745
+            widget: string
+          - hint: 'Original text: Frequently asked question 3, key: 1755a746'
+            label: Text
+            name: 1755a746
+            widget: string
+          - hint: 'Original text: Frequently asked question 4, key: 1755a747'
+            label: Text
+            name: 1755a747
+            widget: string
+          - hint: 'Original text: Tells us what your concern !, key: -7578b194'
+            label: Text
+            name: '-7578b194'
+            widget: string
+          - hint: >-
+              Original text: If you have any question or want to book your
+              seat., key: 7c1457d3
+            label: Text
+            name: 7c1457d3
+            widget: string
+          - hint: 'Original text: Chat with us, key: -73d87c70'
+            label: Text
+            name: '-73d87c70'
+            widget: string
+          - hint: 'Original text: Highlight, key: 4ed7ac94'
+            label: Text
+            name: 4ed7ac94
+            widget: string
+          - hint: 'Original text: Cost, key: 2023ed'
+            label: Text
+            name: 2023ed
+            widget: string
+          - hint: 'Original text: Booking, key: 6713a039'
+            label: Text
+            name: 6713a039
+            widget: string
+          - hint: 'Original text: Itinerary , key: -1ef5d36b'
+            label: Text
+            name: '-1ef5d36b'
+            widget: string
+          - hint: 'Original text: Day 1, key: 3ec208d'
+            label: Text
+            name: 3ec208d
+            widget: string
+          - hint: 'Original text: Day 2, key: 3ec208e'
+            label: Text
+            name: 3ec208e
+            widget: string
+          - hint: 'Original text: Day 3, key: 3ec208f'
+            label: Text
+            name: 3ec208f
+            widget: string
+          - hint: 'Original text: Day 4, key: 3ec2090'
+            label: Text
+            name: 3ec2090
+            widget: string
+          - hint: 'Original text: Day 5, key: 3ec2091'
+            label: Text
+            name: 3ec2091
+            widget: string
+          - hint: 'Original text: Day 6, key: 3ec2092'
+            label: Text
+            name: 3ec2092
+            widget: string
+          - hint: 'Original text: Day 7, key: 3ec2093'
+            label: Text
+            name: 3ec2093
+            widget: string
+          - hint: 'Original text: Day 8, key: 3ec2094'
+            label: Text
+            name: 3ec2094
+            widget: string
+          - hint: 'Original text: Day 9, key: 3ec2095'
+            label: Text
+            name: 3ec2095
+            widget: string
+          - hint: 'Original text: Day 10, key: 7997f143'
+            label: Text
+            name: 7997f143
+            widget: string
+          - hint: 'Original text: Day 11, key: 7997f144'
+            label: Text
+            name: 7997f144
+            widget: string
+          - hint: 'Original text: Day 12, key: 7997f145'
+            label: Text
+            name: 7997f145
+            widget: string
+          - hint: 'Original text: Day 13, key: 7997f146'
+            label: Text
+            name: 7997f146
+            widget: string
+          - hint: 'Original text: Day 14, key: 7997f147'
+            label: Text
+            name: 7997f147
+            widget: string
+          - hint: 'Original text: Day 15, key: 7997f148'
+            label: Text
+            name: 7997f148
+            widget: string
+          - hint: 'Original text: What''s Included, key: 256dfbec'
+            label: Text
+            name: 256dfbec
+            widget: string
+          - hint: 'Original text: What''s Excluded, key: -69186706'
+            label: Text
+            name: '-69186706'
+            widget: string
+          - hint: 'Original text: Let''s Start The Journey , key: 57d2e2e6'
+            label: Text
+            name: 57d2e2e6
+            widget: string
+          - hint: 'Original text: Book Now, key: 7b3ec11f'
+            label: Text
+            name: 7b3ec11f
+            widget: string
+          - hint: 'Original text: WhatsApp us via the button, key: c12bbc7'
+            label: Text
+            name: c12bbc7
+            widget: string
+          - hint: 'Original text: or email us: , key: -405bc55b'
+            label: Text
+            name: '-405bc55b'
+            widget: string
+          - hint: 'Original text: Heading, key: -6d5fea1e'
+            label: Text
+            name: '-6d5fea1e'
+            widget: string
+          - hint: 'Original text: Eternal Tours Sdn Bhd (638825-J) , key: 1a201af'
+            label: Text
+            name: 1a201af
+            widget: string
+          - hint: 'Original text: License No. KPK/LN : 10815, key: -2121678c'
+            label: Text
+            name: '-2121678c'
+            widget: string
+          - hint: 'Original text: Phone:, key: -718ea354'
+            label: Text
+            name: '-718ea354'
+            widget: string
+          - hint: 'Original text: +60 10-216 4588, key: -6ef69da3'
+            label: Text
+            name: '-6ef69da3'
+            widget: string
+          - hint: 'Original text: Email:, key: 7bec143e'
+            label: Text
+            name: 7bec143e
+            widget: string
+          - hint: 'Original text: Social Networks:, key: 7b4f8fe2'
+            label: Text
+            name: 7b4f8fe2
+            widget: string
+          - hint: 'Original text: Address:, key: -44c9b91a'
+            label: Text
+            name: '-44c9b91a'
+            widget: string
+          - hint: >-
+              Original text: C-16-15, Taman Zeta@Zetapark, Setapak Central,,
+              key: 10277dd1
+            label: Text
+            name: 10277dd1
+            widget: string
+          - hint: >-
+              Original text: Jalan Taman Ibu Kota, Setapak, 53200 Kuala Lumpur.,
+              key: -3470ee30
+            label: Text
+            name: '-3470ee30'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: >-
+              Original link:
+              https://webflow.com/website/Hatch-A-Utility-Framework-for-Webflow,
+              key: -94782e8
+            label: Link
+            name: '-94782e8'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.notion.so/flowmingo/Hatch-0d4a03cf6c9f474787e59484822d09c7,
+              key: 1d629366
+            label: Link
+            name: 1d629366
+            widget: string
+          - hint: 'Original link: https://www.flowmingo.co/, key: -5fcd4865'
+            label: Link
+            name: '-5fcd4865'
+            widget: string
+          - hint: 'Original link: #overview, key: 64f41a9c'
+            label: Link
+            name: 64f41a9c
+            widget: string
+          - hint: 'Original link: #colors, key: -154728ad'
+            label: Link
+            name: '-154728ad'
+            widget: string
+          - hint: 'Original link: #typography, key: 3972e592'
+            label: Link
+            name: '3972e592'
+            widget: string
+          - hint: 'Original link: #elements, key: 44dbee1a'
+            label: Link
+            name: 44dbee1a
+            widget: string
+          - hint: >-
+              Original link: https://fonts.google.com/specimen/Poppins, key:
+              4ee0e0b2
+            label: Link
+            name: 4ee0e0b2
+            widget: string
+          - hint: 'Original link: https://twitter.com/mackenziechild, key: -531a3edd'
+            label: Link
+            name: '-531a3edd'
+            widget: string
+          - hint: >-
+              Original link: mailto:mackenzie@flowmingo.co?subject=Hatch, key:
+              -bd2018b
+            label: Link
+            name: '-bd2018b'
+            widget: string
+          - hint: 'Original link: http://wfl.io/flowmingo, key: -575ffa7a'
+            label: Link
+            name: '-575ffa7a'
+            widget: string
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /contact-us, key: 5e5270da'
+            label: Link
+            name: 5e5270da
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.facebook.com/profile.php?id=100089675832982&mibextid=ZbWKwL,
+              key: 302d373c
+            label: Link
+            name: 302d373c
+            widget: string
+          - hint: >-
+              Original link:
+              https://instagram.com/eternaltours.travel?igshid=ZGUzMzM3NWJiOQ==,
+              key: 64554150
+            label: Link
+            name: '64554150'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.tiktok.com/@eternal.tours?_t=8cu76aDOEXx&_r=1, key:
+              -6e6a6466
+            label: Link
+            name: '-6e6a6466'
+            widget: string
+          - hint: >-
+              Original link:
+              http://wa.me/60102164588?text=Hi%20ET!%0AAre%20you%20there?, key:
+              -670ea5b7
+            label: Link
+            name: '-670ea5b7'
+            widget: string
+          - hint: >-
+              Original link: mailto:info@eternaltours.net?subject=Hi%20ET%2C,
+              key: 6625803e
+            label: Link
+            name: 6625803e
+            widget: string
+          - hint: >-
+              Original link:
+              http://wa.me/60102164588?text=Hi%20Eternal%20Tours!%0AAre%20you%20there?,
+              key: 2cb56321
+            label: Link
+            name: 2cb56321
+            widget: string
+          - hint: >-
+              Original link:
+              http://wa.me/60102164588?text=Hi%20Eternal%20Tours!, key: 284f8423
+            label: Link
+            name: 284f8423
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:info@eternaltours.net?subject=Hi%20Eternal%20Tours, key:
+              -4416b414
+            label: Link
+            name: '-4416b414'
+            widget: string
+          - hint: 'Original link: tel:+60102164588, key: 4bbc713'
+            label: Link
+            name: 4bbc713
+            widget: string
+          - hint: 'Original link: /#tours, key: -76aa039'
+            label: Link
+            name: '-76aa039'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 74d9c704
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 74e7de85
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1bf398af
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4c1e839b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4b77d5be'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 883e5b3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-49a5af45'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 25899b7f
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '34686e68'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 361d4707
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3986f845
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 37d21fa6
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-28bbfc87'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-313c3ef7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4af02273'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-176188cc'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: e5e63a8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: e504c27
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: e4234a6
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3fec93ee'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: e6cfa5e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4d7cfb59
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2e76e267
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 317f733b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5b835b45
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 72de4ab4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1b00b146'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
